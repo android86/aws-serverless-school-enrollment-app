@@ -6,11 +6,15 @@ Online School Enrolment App is a web application portal that allows Parents to s
 
 ![Serverless Initial Architecture](./media/prototype-architecture.png)
 
+### Online Enrolment - UI/UX
+
+![Enrolment UI/UX](./media/enrollment-app-ui-flow.png)
+
 ### Task List
 
 - [x] High Level Diagram
 - [x] Use Cases
-- [ ] UI/UX (mockup)
+- [x] UI/UX (mockup)
 - [ ] Build the frontend w/ React and Material UI using mock data
 - [ ] Build the DB and queries w/ GraphQL
 - [ ] Build the backend w/ Amplify and AppSync
