@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "awsserverlessschoole-dev-20190818001259-authRole",
+            "UnauthRoleArn": "arn:aws:iam::356215812515:role/awsserverlessschoole-dev-20190818001259-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::356215812515:role/awsserverlessschoole-dev-20190818001259-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "awsserverlessschoole-dev-20190818001259-deployment",
+            "UnauthRoleName": "awsserverlessschoole-dev-20190818001259-unauthRole",
+            "StackName": "awsserverlessschoole-dev-20190818001259",
+            "StackId": "arn:aws:cloudformation:us-east-2:356215812515:stack/awsserverlessschoole-dev-20190818001259/e2f208d0-c109-11e9-a961-02edfbb31034"
+        }
+    }
+}
