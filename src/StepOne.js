@@ -74,11 +74,15 @@ const useStyles = makeStyles(theme => ({
     },
     typography: {
         margin: theme.spacing(1),
+        marginBottom: theme.spacing(4),
         textAlign: 'center'
+    },
+    container: {
+        marginBottom: theme.spacing(4)
     }
 }));
 
-export default function AddressForm() {
+export default function StepOne() {
     const classes = useStyles();
 
     const [birthday, setBirthday] = React.useState({
@@ -97,13 +101,13 @@ export default function AddressForm() {
     return (
         <React.Fragment>
             <Typography
-                variant="h6"
+                variant="h5"
                 gutterBottom
                 className={classes.typography}
             >
                 Enter your child's birthday
             </Typography>
-            <Grid container>
+            <Grid container className={classes.container}>
                 <Grid item xs={5}>
                     <FormControl fullWidth>
                         <TextField
