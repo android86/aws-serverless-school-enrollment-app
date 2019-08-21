@@ -50,35 +50,47 @@ export default function StepTwo() {
 
     return (
         <React.Fragment>
-            <Typography
-                variant="h5"
-                gutterBottom
-                className={classes.typography}
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
             >
-                Select a schedule
-            </Typography>
-
-            <FormControl component="fieldset" className={classes.formControl}>
-                {/* <FormLabel component="legend">Gender</FormLabel> */}
-                <RadioGroup
-                    aria-label="gender"
-                    name="gender1"
-                    className={classes.group}
-                    value={value}
-                    onChange={handleChange}
-                >
-                    <FormControlLabel
-                        value="female"
-                        control={<Radio color="primary" />}
-                        label="8 AM - 10 AM"
-                    />
-                    <FormControlLabel
-                        value="male"
-                        control={<Radio color="primary" />}
-                        label="1 PM - 3 PM"
-                    />
-                </RadioGroup>
-            </FormControl>
+                <Grid item xs={12}>
+                    <Typography
+                        variant="h5"
+                        gutterBottom
+                        className={classes.typography}
+                    >
+                        Select a schedule
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <FormControl
+                        component="fieldset"
+                        className={classes.formControl}
+                    >
+                        <RadioGroup
+                            aria-label="gender"
+                            name="gender1"
+                            className={classes.group}
+                            value={value}
+                            onChange={handleChange}
+                        >
+                            <FormControlLabel
+                                value="female"
+                                control={<Radio color="primary" />}
+                                label="8 AM - 10 AM"
+                            />
+                            <FormControlLabel
+                                value="male"
+                                control={<Radio color="primary" />}
+                                label="1 PM - 3 PM"
+                            />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
+            </Grid>
         </React.Fragment>
     );
 }

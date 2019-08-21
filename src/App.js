@@ -9,6 +9,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Grid from '@material-ui/core/Grid';
 
 import 'typeface-roboto';
 
@@ -54,7 +55,6 @@ const useStyles = makeStyles(theme => ({
     },
     layout: {
         width: 'auto',
-        marginTop: theme.spacing(15),
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
         [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
@@ -63,8 +63,9 @@ const useStyles = makeStyles(theme => ({
             marginRight: 'auto'
         },
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: '100%',
+        paddingBottom: '60px'
     },
     paper: {
         marginTop: theme.spacing(3),
@@ -81,8 +82,7 @@ const useStyles = makeStyles(theme => ({
     },
     buttons: {
         display: 'flex',
-        justifyContent: 'flex-end'
-        // width: '100%'
+        justifyContent: 'center'
     },
     button: {
         margin: theme.spacing(1),
@@ -149,48 +149,53 @@ export default function App() {
             </AppBar>
 
             <main className={classes.layout}>
-                {/* <Paper className={classes.paper}> */}
-                <React.Fragment>
-                    {activeStep === steps.length ? (
-                        <React.Fragment>
-                            <Typography variant="h5" gutterBottom>
-                                Thank you for your reservation.
-                            </Typography>
-                            <Typography variant="subtitle1">
-                                Your reservation number is #2001539. We have
-                                emailed your reservation confirmation that you
-                                can present to the office upon payment.
-                            </Typography>
-                        </React.Fragment>
-                    ) : (
-                        <React.Fragment>
-                            {getStepContent(activeStep)}
-                            <div className={classes.buttons}>
-                                {activeStep !== 0 && (
+                <Grid
+                    container
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                >
+                    <Grid item>
+                        {activeStep === steps.length ? (
+                            <React.Fragment>
+                                <Typography variant="h5" gutterBottom>
+                                    Thank you for your reservation.
+                                </Typography>
+                                <Typography variant="subtitle1">
+                                    Your reservation number is #2001539. We have
+                                    emailed your reservation confirmation that
+                                    you can present to the office upon payment.
+                                </Typography>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                {getStepContent(activeStep)}
+                                <div className={classes.buttons}>
+                                    {activeStep !== 0 && (
+                                        <Button
+                                            onClick={handleBack}
+                                            className={classes.button}
+                                        >
+                                            Back
+                                        </Button>
+                                    )}
                                     <Button
-                                        onClick={handleBack}
+                                        size="large"
+                                        variant="contained"
+                                        color="primary"
+                                        // fullWidth={true}
+                                        onClick={handleNext}
                                         className={classes.button}
                                     >
-                                        Back
+                                        {activeStep === steps.length - 1
+                                            ? 'Confirm'
+                                            : 'Next'}
                                     </Button>
-                                )}
-                                <Button
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    // fullWidth={true}
-                                    onClick={handleNext}
-                                    className={classes.button}
-                                >
-                                    {activeStep === steps.length - 1
-                                        ? 'Confirm'
-                                        : 'Next'}
-                                </Button>
-                            </div>
-                        </React.Fragment>
-                    )}
-                </React.Fragment>
-                {/* </Paper> */}
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </Grid>
+                </Grid>
             </main>
             <Copyright />
         </React.Fragment>
