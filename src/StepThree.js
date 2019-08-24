@@ -7,6 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+import { Header } from './components/Header';
+
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -51,13 +53,7 @@ export default function StepThree() {
 
     return (
         <React.Fragment>
-            <Typography
-                variant="h5"
-                gutterBottom
-                className={classes.typography}
-            >
-                Additional Information
-            </Typography>
+            <Header text="Additional Information" />
             <Grid container className={classes.container}>
                 <Grid item xs={6}>
                     <TextField

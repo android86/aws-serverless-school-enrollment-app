@@ -11,6 +11,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 
+import { Header } from './components/Header';
+
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
@@ -57,13 +59,7 @@ export default function StepTwo() {
                 alignItems="center"
             >
                 <Grid item xs={12}>
-                    <Typography
-                        variant="h5"
-                        gutterBottom
-                        className={classes.typography}
-                    >
-                        Select a schedule
-                    </Typography>
+                    <Header text="Select a schedule" />
                 </Grid>
                 <Grid item xs={12}>
                     <FormControl
