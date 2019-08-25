@@ -183,7 +183,6 @@ export default function App() {
                                         size="large"
                                         variant="contained"
                                         color="primary"
-                                        // fullWidth={true}
                                         onClick={handleNext}
                                         className={classes.button}
                                     >

@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+
+import { connect } from 'react-redux';
+import * as birthdayActions from './redux/actions/birth';
 
 import { Header } from './components/Header';
 import { Select } from './components/Select';
@@ -32,10 +34,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function StepOne() {
+const StepOne = props => {
     const classes = useStyles();
 
     const dayTextField = useRef(null);
+
+    const [editing, setEditing] = useState(false);
 
     const [birth, setBirth] = useState({
         month: '-',
@@ -52,13 +56,19 @@ export default function StepOne() {
         });
 
         setCurrentField(currentField === 'month' ? 'day' : null);
+
+        setEditing(true);
     };
 
     useEffect(() => {
-        if (currentField === 'day') {
-            dayTextField.current.focus();
+        if (editing) {
+            props.enterBirthDay(birth);
+
+            if (currentField === 'day') {
+                dayTextField.current.focus();
+            }
         }
-    });
+    }, [birth, currentField, editing, props]);
 
     let dayProps = {
         value: birth.day,
@@ -91,4 +101,23 @@ export default function StepOne() {
             </Grid>
         </React.Fragment>
     );
-}
+};
+
+// tells redux what state is gonna be passed to this component via props;
+let ms2p = state => {
+    return {
+        birthday: state.birthDay ? state.birthDay.birth : null
+    };
+};
+
+let md2p = dispatch => {
+    return {
+        enterBirthDay: birthday =>
+            dispatch(birthdayActions.enterBirthDay(birthday))
+    };
+};
+
+export default connect(
+    ms2p,
+    md2p
+)(StepOne);
