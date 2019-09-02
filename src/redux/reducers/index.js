@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { birthDay } from './birth';
+import birthday from './birthday';
 
 const rootReducer = combineReducers({
-    birthDay
+    birthday
 });
 
 export default rootReducer;

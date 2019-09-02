@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import * as birthdayActions from './redux/actions/birth';
 
@@ -38,49 +40,41 @@ const StepOne = props => {
     const classes = useStyles();
 
     const dayTextField = useRef(null);
-
     const [editing, setEditing] = useState(false);
 
-    const [birth, setBirth] = useState({
-        month: '-',
-        day: '',
-        year: ''
-    });
+    const [day, setDay] = useState(props.day);
+    const [month, setMonth] = useState(props.month);
+    const [year, setYear] = useState(props.year);
 
     const [currentField, setCurrentField] = useState('month');
 
-    const onChange = date => event => {
-        setBirth({
-            ...birth,
-            [date]: event.target.value
-        });
-
-        setCurrentField(currentField === 'month' ? 'day' : null);
-
-        setEditing(true);
+    const onDayChange = () => event => {
+        const { value } = event.target;
+        setDay(value);
+        props.addDay(value);
+    };
+    const onMonthChange = () => event => {
+        const { value } = event.target;
+        setMonth(value);
+        props.addMonth(value);
+    };
+    const onYearChange = () => event => {
+        const { value } = event.target;
+        setYear(value);
+        props.addYear(value);
     };
 
-    useEffect(() => {
-        if (editing) {
-            props.enterBirthDay(birth);
-
-            if (currentField === 'day') {
-                dayTextField.current.focus();
-            }
-        }
-    }, [birth, currentField, editing, props]);
-
     let dayProps = {
-        value: birth.day,
+        value: day,
         label: 'Day',
-        onChange: onChange('day'),
+        onChange: onDayChange(),
         inputRef: dayTextField
     };
 
     let yearProps = {
-        value: birth.year,
+        value: year,
         label: 'Year',
-        onChange: onChange('year'),
+        onChange: onYearChange(),
         inputRef: null
     };
 
@@ -90,7 +84,7 @@ const StepOne = props => {
 
             <Grid container className={classes.container}>
                 <Grid item xs={5}>
-                    <Select month={birth.month} onChange={onChange('month')} />
+                    <Select month={month} onChange={onMonthChange()} />
                 </Grid>
                 <Grid item xs={3}>
                     <Text in={dayProps} />
@@ -103,17 +97,25 @@ const StepOne = props => {
     );
 };
 
-// tells redux what state is gonna be passed to this component via props;
+// StepOne.propTypes = {
+//     birthday: PropTypes.object.isRequired
+// };
+
 let ms2p = state => {
-    return {
-        birthday: state.birthDay ? state.birthDay.birth : null
-    };
+    let ret = {
+        day: state.birthday.hasOwnProperty('day') ? state.birthday.day : '',
+        month: state.birthday.hasOwnProperty('month') ? state.birthday.month : '',
+        year: state.birthday.hasOwnProperty('year') ? state.birthday.year : ''
+    }
+
+    return ret;
 };
 
 let md2p = dispatch => {
     return {
-        enterBirthDay: birthday =>
-            dispatch(birthdayActions.enterBirthDay(birthday))
+        addDay: day => dispatch(birthdayActions.addBirthDay(day)),
+        addMonth: month => dispatch(birthdayActions.addBirthMonth(month)),
+        addYear: year => dispatch(birthdayActions.addBirthYear(year))
     };
 };
 
