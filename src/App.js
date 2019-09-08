@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-// import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Grid from '@material-ui/core/Grid';
-
 import 'typeface-roboto';
 
 import StepOne from './StepOne';
@@ -99,10 +97,10 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ['Step One', 'Step Two', 'Step Three'];
 
-function getStepContent(step) {
+function getStepContent(step, handlers) {
     switch (step) {
         case 0:
-            return <StepOne />;
+            return <StepOne in={handlers} />;
         case 1:
             return <StepTwo />;
         case 2:
@@ -114,7 +112,7 @@ function getStepContent(step) {
 
 export default function App() {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
         setActiveStep(activeStep + 1);
@@ -122,6 +120,40 @@ export default function App() {
 
     const handleBack = () => {
         setActiveStep(activeStep - 1);
+    };
+
+    let rsvn = {
+        birthday: {
+            month: '',
+            day: '',
+            year: ''
+        },
+        schedule: {},
+        child: {},
+        guardian: {},
+        contact: {}
+    };
+
+    const [reservation, setReservation] = useState(rsvn);
+
+    const onChange = field => event => {
+        // where:
+        // field.type = 'birthday'
+        // field.label = 'month'
+
+        const { value } = event.target;
+
+        let rsvn = {
+            ...reservation,
+            [field.type]: { ...reservation[field.type], [field.label]: value }
+        };
+
+        setReservation(rsvn);
+    };
+
+    const pl = {
+        onChange,
+        reservation
     };
 
     return (
@@ -169,7 +201,7 @@ export default function App() {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {getStepContent(activeStep)}
+                                {getStepContent(activeStep, pl)}
                                 <div className={classes.buttons}>
                                     {activeStep !== 0 && (
                                         <Button
