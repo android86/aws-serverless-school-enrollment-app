@@ -21,14 +21,15 @@ export const Text = props => {
                 label={props.in.label}
                 value={props.in.value}
                 onChange={props.in.onChange}
-                type="number"
+                type={props.in.type || 'text'}
                 className={classes.textField}
                 InputLabelProps={{
                     shrink: true
                 }}
                 margin="normal"
-                variant="outlined"
+                variant={props.in.variant || 'standard'}
                 inputRef={props.in.inputRef}
+                helperText={props.in.helperText}
             />
         </FormControl>
     );

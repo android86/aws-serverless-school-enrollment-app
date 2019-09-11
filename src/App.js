@@ -104,7 +104,7 @@ function getStepContent(step, handlers) {
         case 1:
             return <StepTwo in={handlers} />;
         case 2:
-            return <StepThree />;
+            return <StepThree in={handlers} />;
         default:
             throw new Error('Unknown step');
     }
@@ -124,16 +124,25 @@ export default function App() {
 
     let rsvn = {
         birthday: {
-            month: '',
+            month: '-',
             day: '',
             year: ''
         },
         schedule: {
             time: ''
         },
-        child: {},
-        guardian: {},
-        contact: {}
+        child: {
+            firstName: '',
+            lastName: ''
+        },
+        guardian: {
+            firstName: '',
+            lastName: ''
+        },
+        contact: {
+            phone: '',
+            email: ''
+        }
     };
 
     const [reservation, setReservation] = useState(rsvn);

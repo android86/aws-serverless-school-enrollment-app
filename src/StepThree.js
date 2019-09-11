@@ -1,13 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { Header } from './components/Header';
+import { Text } from './components/Text';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,126 +31,96 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function StepThree() {
+const StepThree = props => {
     const classes = useStyles();
 
-    const [info, setInfo] = React.useState({
-        childName: '',
-        guardianName: '',
-        phoneNumber: ''
-    });
+    let firstNameProps = {
+        value: props.in.reservation.child.firstName,
+        label: 'First Name',
+        helperText: "Child's name",
+        onChange: props.in.onChange({
+            type: 'child',
+            label: 'firstName'
+        })
+    };
 
-    const handleChange = details => event => {
-        setInfo({
-            ...info,
-            [details]: event.target.value
-        });
+    let lastNameProps = {
+        value: props.in.reservation.child.lastName,
+        label: 'Last Name',
+        onChange: props.in.onChange({
+            type: 'child',
+            label: 'lastName'
+        })
+    };
+
+    let gFirstNameProps = {
+        value: props.in.reservation.guardian.firstName,
+        label: 'First Name',
+        helperText: "Guardian's name",
+        onChange: props.in.onChange({
+            type: 'guardian',
+            label: 'firstName'
+        })
+    };
+
+    let gLastNameProps = {
+        value: props.in.reservation.guardian.lastName,
+        label: 'Last Name',
+        onChange: props.in.onChange({
+            type: 'guardian',
+            label: 'lastName'
+        })
+    };
+
+    let phoneProps = {
+        value: props.in.reservation.contact.phone,
+        label: 'Phone Number',
+        helperText: 'Contact Info',
+        onChange: props.in.onChange({
+            type: 'contact',
+            label: 'phone'
+        })
+    };
+
+    let emailProps = {
+        value: props.in.reservation.contact.email,
+        label: 'Email',
+        onChange: props.in.onChange({
+            type: 'contact',
+            label: 'email'
+        })
     };
 
     return (
         <React.Fragment>
             <Header text="Additional Information" />
-            <Grid container className={classes.container}>
-                <Grid item xs={6}>
-                    <TextField
-                        id="outlined-number"
-                        label="First Name"
-                        value={info.day}
-                        onChange={handleChange('day')}
-                        type="text"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        margin="normal"
-                        // variant="outlined"
-                        helperText="Child's name"
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <TextField
-                        id="outlined-number"
-                        label="Last Name"
-                        value={info.year}
-                        onChange={handleChange('year')}
-                        type="text"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        margin="normal"
-                        // variant="outlined"
-                    />
-                </Grid>
-            </Grid>
-            <Grid container className={classes.container}>
-                <Grid item xs={6}>
-                    <TextField
-                        id="outlined-number"
-                        label="First Name"
-                        value={info.day}
-                        onChange={handleChange('day')}
-                        type="text"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        margin="normal"
-                        // variant="outlined"
-                        helperText="Guardian's name"
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <TextField
-                        id="outlined-number"
-                        label="Last Name"
-                        value={info.year}
-                        onChange={handleChange('year')}
-                        type="text"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        margin="normal"
-                        // variant="outlined"
-                    />
-                </Grid>
-            </Grid>
 
             <Grid container className={classes.container}>
                 <Grid item xs={6}>
-                    <TextField
-                        id="outlined-number"
-                        label="Phone Number"
-                        // fullWidth={true}
-                        value={info.year}
-                        onChange={handleChange('year')}
-                        type="text"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        margin="normal"
-                        // variant="outlined"
-                        helperText="Contact Info"
-                    />
+                    <Text in={firstNameProps} />
                 </Grid>
                 <Grid item xs={6}>
-                    <TextField
-                        id="outlined-number"
-                        label="Email"
-                        value={info.year}
-                        onChange={handleChange('year')}
-                        type="text"
-                        className={classes.textField}
-                        InputLabelProps={{
-                            shrink: true
-                        }}
-                        margin="normal"
-                        // variant="outlined"
-                    />
+                    <Text in={lastNameProps} />
+                </Grid>
+            </Grid>
+            <Grid container className={classes.container}>
+                <Grid item xs={6}>
+                    <Text in={gFirstNameProps} />
+                </Grid>
+                <Grid item xs={6}>
+                    <Text in={gLastNameProps} />
+                </Grid>
+            </Grid>
+            <Grid container className={classes.container}>
+                <Grid item xs={6}>
+                    <Text in={phoneProps} />
+                </Grid>
+                <Grid item xs={6}>
+                    <Text in={emailProps} />
                 </Grid>
             </Grid>
         </React.Fragment>
     );
-}
+};
+
+export default StepThree;

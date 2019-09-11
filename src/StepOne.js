@@ -37,6 +37,8 @@ const StepOne = props => {
     let dayProps = {
         value: props.in.reservation.birthday.day,
         label: 'Day',
+        variant: 'outlined',
+        type: 'number',
         onChange: props.in.onChange({
             type: 'birthday',
             label: 'day'
@@ -46,6 +48,8 @@ const StepOne = props => {
     let yearProps = {
         value: props.in.reservation.birthday.year,
         label: 'Year',
+        variant: 'outlined',
+        type: 'number',
         onChange: props.in.onChange({
             type: 'birthday',
             label: 'year'
