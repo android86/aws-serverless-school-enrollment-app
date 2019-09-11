@@ -102,7 +102,7 @@ function getStepContent(step, handlers) {
         case 0:
             return <StepOne in={handlers} />;
         case 1:
-            return <StepTwo />;
+            return <StepTwo in={handlers} />;
         case 2:
             return <StepThree />;
         default:
@@ -128,7 +128,9 @@ export default function App() {
             day: '',
             year: ''
         },
-        schedule: {},
+        schedule: {
+            time: ''
+        },
         child: {},
         guardian: {},
         contact: {}
@@ -149,6 +151,8 @@ export default function App() {
         };
 
         setReservation(rsvn);
+
+        console.log(rsvn);
     };
 
     const pl = {

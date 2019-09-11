@@ -1,15 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 
 import { Header } from './components/Header';
 
@@ -41,26 +36,19 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function StepTwo() {
+const StepTwo = props => {
     const classes = useStyles();
-
-    const [value, setValue] = React.useState('female');
-
-    function handleChange(event) {
-        setValue(event.target.value);
-    }
 
     return (
         <React.Fragment>
+            <Header text="Select a schedule" />
+
             <Grid
                 container
                 direction="column"
                 justify="center"
                 alignItems="center"
             >
-                <Grid item xs={12}>
-                    <Header text="Select a schedule" />
-                </Grid>
                 <Grid item xs={12}>
                     <FormControl
                         component="fieldset"
@@ -70,16 +58,19 @@ export default function StepTwo() {
                             aria-label="gender"
                             name="gender1"
                             className={classes.group}
-                            value={value}
-                            onChange={handleChange}
+                            value={props.in.reservation.schedule.time}
+                            onChange={props.in.onChange({
+                                type: 'schedule',
+                                label: 'time'
+                            })}
                         >
                             <FormControlLabel
-                                value="female"
+                                value="8 AM - 10 AM"
                                 control={<Radio color="primary" />}
                                 label="8 AM - 10 AM"
                             />
                             <FormControlLabel
-                                value="male"
+                                value="1 PM - 3 PM"
                                 control={<Radio color="primary" />}
                                 label="1 PM - 3 PM"
                             />
@@ -89,4 +80,6 @@ export default function StepTwo() {
             </Grid>
         </React.Fragment>
     );
-}
+};
+
+export default StepTwo;
