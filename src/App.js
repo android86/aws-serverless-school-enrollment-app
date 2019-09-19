@@ -15,6 +15,12 @@ import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import * as mutations from './graphql/mutations';
+import awsconfig from './aws-exports';
+
+API.configure(awsconfig);
+
 function Copyright() {
     const classes = useStyles();
 
@@ -115,6 +121,31 @@ export default function App() {
     const [activeStep, setActiveStep] = useState(0);
 
     const handleNext = () => {
+        if (activeStep === steps.length - 1) {
+            const payload = {
+                child: `${reservation.child.firstName} ${reservation.child.lastName}`,
+                guardian: `${reservation.guardian.firstName} ${reservation.guardian.lastName}`,
+                birthday: `${reservation.birthday.year}-${reservation.birthday.month}-${reservation.birthday.day}`,
+                schedule: reservation.schedule.time,
+                phone: reservation.contact.phone,
+                email: reservation.contact.email
+            };
+
+            let post = async data => {
+                const rsvn = await API.graphql(
+                    graphqlOperation(mutations.createReservation, {
+                        input: data
+                    })
+                );
+
+                console.log(rsvn);
+
+                return rsvn;
+            };
+
+            post(payload);
+        }
+
         setActiveStep(activeStep + 1);
     };
 
@@ -160,8 +191,6 @@ export default function App() {
         };
 
         setReservation(rsvn);
-
-        console.log(rsvn);
     };
 
     const pl = {
