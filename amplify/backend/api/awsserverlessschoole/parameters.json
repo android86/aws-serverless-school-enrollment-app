@@ -1,0 +1,4 @@
+{
+    "AppSyncApiName": "awsserverlessschoole",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST"
+}

@@ -1,0 +1,9 @@
+type Reservation @model {
+    id: ID!
+    child: String!
+    guardian: String
+    birthday: String
+    schedule: String
+    phone: String
+    email: String
+}
