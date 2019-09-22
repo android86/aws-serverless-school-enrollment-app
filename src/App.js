@@ -36,10 +36,6 @@ function Copyright() {
                 n3rfd
             </Link>{' '}
             {new Date().getFullYear()}
-            {'. Built with '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Material-UI.
-            </Link>
         </Typography>
     );
 }
